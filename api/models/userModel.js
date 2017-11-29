@@ -12,9 +12,13 @@ var UserSchema = new Schema({
         type: String,
         required: 'Kindly enter the password of the User'
     },
-    Created_date: {
+    created: {
         type: Date,
         default: Date.now
+    },
+    email: {
+        type: String,
+        required: 'Kindly enter the email of the User'
     },
     status: {
         type: [{

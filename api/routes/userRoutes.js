@@ -4,7 +4,7 @@ module.exports = function(app) {
 
     // user Routes
     app.route('/users')
-        .get(user._all_users)
+        .get(user.list_all_users)
         .post(user.create_a_user);
 
 
