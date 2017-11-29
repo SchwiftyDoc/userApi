@@ -1,6 +1,5 @@
 const express = require('express'),
     app = express(),
-    bind = '0.0.0.0',
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     User = require('./api/models/userModel'),
@@ -16,6 +15,6 @@ app.use(bodyParser.json());
 var routes = require('./api/routes/userRoutes');
 routes(app);
 
-app.listen(port, bind);
+app.listen(port);
 
 console.log('User RESTful API server started on: ' + port);
