@@ -1,0 +1,32 @@
+{
+  "name": "userapi",
+  "version": "1.0.0",
+  "description": "NodeJS - Try API in Node for a Backend server as test.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchwiftyDoc/userApi.git"
+  },
+  "keywords": [
+    "Node",
+    "User",
+    "API"
+  ],
+  "author": "Corentin Dekimpe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SchwiftyDoc/userApi/issues"
+  },
+  "homepage": "https://github.com/SchwiftyDoc/userApi#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.13.5"
+  }
+}
