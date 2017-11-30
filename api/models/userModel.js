@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: {
         type: String,
-        required: 'Kindly enter the name of the User'
+        required: 'You need to enter an username to subscribe'
     },
     password: {
         type: String,
-        required: 'Kindly enter the password of the User'
+        required: 'You need to enter a password to subscribe'
     },
     created: {
         type: Date,
@@ -18,7 +18,7 @@ var UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: 'Kindly enter the email of the User'
+        required: 'You need to enter an email to subscribe'
     },
     status: {
         type: [{
