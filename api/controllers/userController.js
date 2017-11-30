@@ -7,7 +7,10 @@ exports.list_all_users = function(req, res) {
     user.find({}, function(err, user) {
         if (err)
             res.send(err);
-        res.json(user);
+        const result = {
+            users: json(user)
+        }
+        res.json(result);
     });
 };
 
