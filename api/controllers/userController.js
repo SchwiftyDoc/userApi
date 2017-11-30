@@ -4,24 +4,31 @@ const mongoose = require('mongoose'),
     user = mongoose.model('Users');
 
 exports.list_all_users = function(req, res) {
-    user.find({}, function(err, user) {
+    user.find({}, function(err, users) {
         if (err)
             res.send(err);
-        const result = {
-            users: json(user)
-        }
-        res.json(result);
+        res.json(users);
     });
 };
 
 exports.create_a_user = function(req, res) {
     let new_user = new user(req.body);
+    console.log(req.body);
     new_user.save(function(err, user) {
         if (err)
             res.send(err);
         res.json(user);
     });
 };
+
+exports.connect_user = function(req, res) {
+    user.findOne({"username": req.body.username, "password": req.body.password}, (err, user) => {
+        if (err)
+            res.send(err);
+        console.log(user);
+        res.json(user);
+    })
+}
 
 exports.read_a_user = function(req, res) {
     user.findById(req.params.userId, function(err, user) {

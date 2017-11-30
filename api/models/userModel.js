@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var UserSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: 'You need to enter an username to subscribe'
     },
