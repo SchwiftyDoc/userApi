@@ -9,6 +9,7 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         unique: true,
+        index: true,
         required: 'A username is required.'
     },
     password: {
@@ -25,7 +26,7 @@ const UserSchema = new Schema({
         lowercase: true,
         unique: true,
         required: 'An email address is required.',
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address.']
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, 'Please fill a valid email address.']
     },
     /*birthday: {
         type: Date,
@@ -38,7 +39,9 @@ const UserSchema = new Schema({
         }],
         default: ['user']
     }
-});
+}, {strict: true});
+
+UserSchema.index({username: 1, email: 1});
 
 /*UserSchema.pre('save', () => {
     const user = this;
