@@ -1,16 +1,19 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const SALT_WORK_FACTOR = 10;
 
-
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
-        required: 'You need to enter an username to subscribe'
+        trim: true,
+        unique: true,
+        required: 'A username is required.'
     },
     password: {
         type: String,
-        required: 'You need to enter a password to subscribe'
+        required: 'A password is required.'
     },
     created: {
         type: Date,
@@ -18,8 +21,16 @@ var UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: 'You need to enter an email to subscribe'
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: 'An email address is required.',
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address.']
     },
+    /*birthday: {
+        type: Date,
+        required: 'Your birthday is required.'
+    },*/
     status: {
         type: [{
             type: String,
@@ -28,5 +39,25 @@ var UserSchema = new Schema({
         default: ['user']
     }
 });
+
+/*UserSchema.pre('save', () => {
+    const user = this;
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+    
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password along with our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            next();
+        });
+    });
+});*/
 
 module.exports = mongoose.model('Users', UserSchema);

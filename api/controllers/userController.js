@@ -13,7 +13,6 @@ exports.list_all_users = function(req, res) {
 
 exports.create_a_user = function(req, res) {
     let new_user = new user(req.body);
-    console.log(req.body);
     new_user.save(function(err, user) {
         if (err)
             res.send(err);
@@ -25,7 +24,6 @@ exports.connect_user = function(req, res) {
     user.findOne({"username": req.body.username, "password": req.body.password}, (err, user) => {
         if (err)
             res.send(err);
-        console.log(user);
         res.json(user);
     })
 }
