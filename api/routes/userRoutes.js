@@ -7,6 +7,9 @@ module.exports = function(app) {
         .get(user.list_all_users)
         .post(user.create_a_user);
 
+    app.route('/validate/:name/:value')
+        .get(user.validate_a_user);
+
     app.route('/signin')
         .post(user.connect_user);
 

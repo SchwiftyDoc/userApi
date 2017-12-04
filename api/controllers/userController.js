@@ -1,7 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-    user = mongoose.model('Users');
+    user = mongoose.model('Users'),
+    email = require('nodemailer');
 
 exports.list_all_users = function(req, res) {
     user.find({}, function(err, users) {
@@ -21,11 +22,24 @@ exports.create_a_user = function(req, res) {
 };
 
 exports.connect_user = function(req, res) {
-    user.findOne({"username": req.body.username, "password": req.body.password}, (err, user) => {
-        if (err)
-            res.send(err);
+    user.findOne({"username": req.body.username}, (err, user) => {
+        if (err) res.send(err);
+
+        if (!user) res.json({});
+        // Test a matching password:
+        user.comparePassword(req.body.password, (err, isMatch) => {
+            if (err) res.send(err);
+            if(isMatch && user.validated) res.json(user);
+            else res.json({})
+        });
+    });
+}
+
+exports.validate_a_user = function(req, res) {
+    user.update({"_id": req.params.value, "username": req.params.name}, { $set: { validated: true} }, (err, user) => {
+        if (err) res.json({'ok': 0});
         res.json(user);
-    })
+    });
 }
 
 exports.read_a_user = function(req, res) {
